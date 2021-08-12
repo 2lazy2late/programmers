@@ -6,6 +6,7 @@ import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Stream;
 
 
+@SuppressWarnings("ALL")
 public class weekly_20210802 {
     public static void main(String[] args) {
         System.out.println("Current Program : weekly_20210802");
@@ -80,7 +81,6 @@ public class weekly_20210802 {
 
         for(int r = 0; r < count; r++){
 
-            int index = r;
             int ownValue = pivotedScores[r][r];
 
             double average = Arrays.stream(pivotedScores[r]).average().getAsDouble();
