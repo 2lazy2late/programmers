@@ -29,7 +29,7 @@ public class weekly_20210802 {
         long afterMemory  = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
 
         System.out.println("result : " +  result);
-        System.out.println((afterTime - beforeTime)/1000+"ms, " + (beforeMemory - afterMemory)/1024 + "MB");
+        System.out.println((afterTime - beforeTime)/1000/1000+"ms, " + (beforeMemory - afterMemory)/1024 + "MB");
 
         
         

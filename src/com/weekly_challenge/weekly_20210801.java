@@ -19,7 +19,7 @@ public class weekly_20210801 {
         System.gc();
         long afterMemory  = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
 
-        System.out.println((afterTime - beforeTime)/1000+"ms, " + (beforeMemory - afterMemory)/1024 + "MB");
+        System.out.println((afterTime - beforeTime)/1000/1000+"ms, " + (beforeMemory - afterMemory)/1024 + "MB");
 
     }
 
