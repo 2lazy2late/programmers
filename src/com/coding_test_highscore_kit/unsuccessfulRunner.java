@@ -3,6 +3,7 @@ package com.coding_test_highscore_kit;
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 
+@SuppressWarnings("ALL")
 public class unsuccessfulRunner {
 
     public static void main(String[] args) {
@@ -57,21 +58,67 @@ public class unsuccessfulRunner {
                 sb.append(chars[rand.nextInt(chars.length)]);
             }
             participant[i] = sb.toString();
-            if(i != incompleteIndex && i != count-1){
-                completion[i] = sb.toString();
-            }else if(i == incompleteIndex ){
-                System.out.println("incomplete member name : " + sb);
+
+            if(incompleteIndex == count-1){
+                if(i != count-1){
+                    completion[i] = sb.toString();
+                }else{
+                    System.out.println("incomplete member name : " + sb);
+                }
+            }else if(incompleteIndex == 0) {
+                if(i != 0){
+                    completion[i-1] = sb.toString();
+                }else{
+                    System.out.println("incomplete member name : " + sb);
+                }
+            }else{
+                if(i < incompleteIndex){
+                    completion[i] = sb.toString();
+                }else if(i == incompleteIndex){
+                    System.out.println("incomplete member name : " + sb);
+                }else{
+                    completion[i-1] = sb.toString();
+                }
             }
         }
 
         return new String[][] {participant, completion};
     }
 
-    // 효율성 테스트 5번 실패
+    // 최종 풀이 : 정확성, 속도 모두 만족
     public static String solution(String[] participant, String[] completion) {
 
-        Map pMap = new HashMap<String, Integer>();
-        Map cMap = new HashMap<String, Integer>();
+        Set<String> memberSet = new HashSet<>();
+        int length = participant.length;
+
+        for(int i = 0; i < length; i++){
+            if(i != 0){
+                String cKey = completion[i-1];
+                if(memberSet.contains(cKey)) {
+                    memberSet.remove(cKey);
+                }else{
+                    memberSet.add(cKey);
+                }
+            }
+
+            String pKey = participant[i];
+            if(memberSet.contains(pKey)) {
+                memberSet.remove(pKey);
+            }else{
+                memberSet.add(pKey);
+            }
+        }
+
+        return memberSet.stream().findFirst().get();
+    }
+
+
+
+    // 효율성 테스트 5번 항목 실패
+    public static String failedSolution2(String[] participant, String[] completion) {
+
+        Map<String, Integer> pMap = new HashMap<>();
+        Map<String, Integer> cMap = new HashMap<>();
 
         for(int i = 0; i < participant.length; i++){
             String pKey = participant[i];
